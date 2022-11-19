@@ -45,7 +45,8 @@ const quizMaker = (array) => {
         counter ++;
       };
     } while (counter < 3); // ensures 4 answer choices
-    finalQuestion.push(answerList);
+    const shuffledAnswers = theShuffler(answerList);
+    finalQuestion.push(shuffledAnswers);
     quizList.push(finalQuestion);
   });
   return quizList;
