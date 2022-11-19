@@ -16,20 +16,11 @@ const theShuffler = (array) => {
  * FUTURE: update so that the '46' is based on the length of the quiz data list
  *
  */
-const getRandomAnswer = () => {
+const getRandomAnswer = (array) => {
   const randomNumber = Math.floor(Math.random() * 46);
-  const randomAnswer = questionList[randomNumber][0];
+  const randomAnswer = array[randomNumber][0];
   return randomAnswer;
 };
-
-/**
- * The main data for the quiz. Shuffled via theShuffler()
- * returns string
- * hiragana/katakana read like: [['a', 'あ'],[etc.]]
- *
- * FUTURE: add function to create a custom list based on user settings
-*/
-export const questionList = theShuffler(hiragana);
 
 /**
  * Creates a list of quiz entries, each containing the question (kana), correct answer (en), and an array of 4 answers (one correct, three incorrect).
@@ -41,14 +32,14 @@ export const questionList = theShuffler(hiragana);
  *
  * FUTURE: update 'counter' to change based on how many answer choices the user selects
  */
-export const quizMaker = (array) => {
+const quizMaker = (array) => {
   const quizList = [];
   array.forEach(element => {
     const finalQuestion = [element[1], element[0]];
     const answerList = [element[0]];
     let counter = 0;
     do {
-      let random = getRandomAnswer();
+      let random = getRandomAnswer(array);
       if (!answerList.includes(random)) {
         answerList.push(random);
         counter ++;
@@ -59,3 +50,14 @@ export const quizMaker = (array) => {
   });
   return quizList;
 };
+
+/**
+ * Starts the quiz - prepares all the data
+ */
+const startQuiz = () => {
+  const shuffledQuiz = theShuffler(hiragana);
+  const quizList = quizMaker(shuffledQuiz);
+  return quizList;
+};
+
+export const quizList = startQuiz();
