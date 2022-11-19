@@ -1,25 +1,46 @@
 import { hiragana } from "../data/hiragana";
 import { katakana } from "../data/katakana";
 
-// Shuffle a list. This takes the list and looks for either a positive or negative number to move the item 'up' or 'down' in the array. This isn't a perfect way to shuffle, but it works.
+/**
+ * Shuffles an array
+ * returns array (nested)
+ */
 const theShuffler = (array) => {
   const shuffledStuff = array.sort((a, b) => 0.5 - Math.random());
   return shuffledStuff;
 };
 
-// Gets a random answer from the list
+/**
+ * Gets a random answer from the quiz data.
+ * returns string
+ * FUTURE: update so that the '46' is based on the length of the quiz data list
+ *
+ */
 const getRandomAnswer = () => {
   const randomNumber = Math.floor(Math.random() * 46);
   const randomAnswer = questionList[randomNumber][0];
   return randomAnswer;
 };
 
-// Create the Shuffled Questions List
-// TODO: Add function to create a custom list based on settings
-// hiragana/katakana read like: [['a', 'あ'],[etc.]]
+/**
+ * The main data for the quiz. Shuffled via theShuffler()
+ * returns string
+ * hiragana/katakana read like: [['a', 'あ'],[etc.]]
+ *
+ * FUTURE: add function to create a custom list based on user settings
+*/
 export const questionList = theShuffler(hiragana);
 
-// Create the quiz questions. Takes in questionList and loops over it, creating a question (['あ', 'a', ['ta', 'chi', 'ke', 'a']]) for each, with unique values. Then shuffles the answers list and pushes them to quizList.
+/**
+ * Creates a list of quiz entries, each containing the question (kana), correct answer (en), and an array of 4 answers (one correct, three incorrect).
+ *
+ * Takes in an array (questionList) -> shuffled via theShuffler()
+ *
+ * Returns an array of arrays. Each inner array is a quiz entry, which reads like: [['あ', 'a', ['be', 'to', 'ka', 'a']], etc.].
+ * returns array (nested)
+ *
+ * FUTURE: update 'counter' to change based on how many answer choices the user selects
+ */
 export const quizMaker = (array) => {
   const quizList = [];
   array.forEach(element => {
@@ -32,33 +53,9 @@ export const quizMaker = (array) => {
         answerList.push(random);
         counter ++;
       };
-    } while (counter < 3);
+    } while (counter < 3); // ensures 4 answer choices
     finalQuestion.push(answerList);
     quizList.push(finalQuestion);
   });
   return quizList;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// PSEUDOCODE
-
-// Get the list of quiz questions (en/ja pairs)
-// For each question
-//    copy the 'en' to a new array
-//    push 3 random unique answers to the new array
-//    shuffle the answers array
-//    create an array that's ['question', 'corr-ans',   ['ans1', 'ans2', 'ans3', 'ans4']]
-// Push each complete question/answer to a new Quiz
