@@ -1,4 +1,4 @@
-const hiragana = [
+const hiragana: string[][] = [
   // a/i/u/e/o/nn
   ['a', 'あ'],
   ['i', 'い'],
@@ -57,7 +57,7 @@ const hiragana = [
   ['wo', 'を'],
 ];
 
-const hiraganaDakuten = [
+const hiraganaDakuten: string[][] = [
   // g
   ['ga', 'が'],
   ['gi', 'ぎ'],
@@ -90,7 +90,7 @@ const hiraganaDakuten = [
   ['po', 'ぽ'],
 ];
 
-const hiraganaContractions = [
+const hiraganaContractions: string[][] = [
   // ky
   ['kya', 'きゃ'],
   ['kyu', 'きゅ'],
@@ -121,7 +121,7 @@ const hiraganaContractions = [
   ['ryo', 'りょ'],
 ];
 
-const hiraganaDakutenContractions = [
+const hiraganaDakutenContractions: string[][] = [
   // gy
   ['gya', 'ぎゃ'],
   ['gyu', 'ぎゅ'],

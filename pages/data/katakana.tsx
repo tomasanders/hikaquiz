@@ -1,4 +1,4 @@
-const katakana = [
+const katakana: string[][] = [
   // a/i/u/e/o/nn
   ['a', 'ア'],
   ['i', 'イ'],
@@ -57,7 +57,7 @@ const katakana = [
   ['wo', 'ヲ'],
 ];
 
-const katakanaDakuten = [
+const katakanaDakuten: string[][] = [
   // g
   ['ga', 'ガ'],
   ['gi', 'ギ'],
@@ -90,7 +90,7 @@ const katakanaDakuten = [
   ['po', 'ポ'],
 ];
 
-const katakanaContractions = [
+const katakanaContractions: string[][] = [
   // ky
   ['kya', 'キャ'],
   ['kyu', 'キュ'],
@@ -121,7 +121,7 @@ const katakanaContractions = [
   ['ryo', 'リョ'],
 ];
 
-const katakanaDakutenContractions = [
+const katakanaDakutenContractions: string[][] = [
   // gy
   ['gya', 'ギャ'],
   ['gyu', 'ギュ'],
