@@ -1,69 +1,64 @@
 import { hiragana } from "../data/hiragana";
-/**
- * TODO:
- *
- * Create quiz logic
- *    Grab hiragana object and move data into questions array
- *    Questions array should have the .en and .ja data
- *    Then should shuffle the order
- *    Then grab the first question and answer, along with 3 random answers (no repeats) and shuffle
- *    Put question in question box and answers in answer boxes
- *
- *    On click, the tile should check if the .en matches the .en data for the question
- *    If so, correct and move to next question - if not, remove that tile and try again (preserve space for removed tile)
- *    If correct, move to next question - if not, highlight correct answer and move to next question
- *
- *    Once quiz is finished, score screen
- *        Number correct (first try)
- *        Number correct (second try)
- *        Number correct (total)
- *        Percent correct (first and second try)
- */
+import { katakana } from "../data/katakana";
 
-// Start with setting up 4 questions
-// Grab all the question keys
-const hiraganaKeys = Object.keys(hiragana);
-const hiraganaLength = hiraganaKeys.length;
-
-// gets a single question and answer pair
-const getQuestionObject = () => {
-  const randomNumber = Math.floor(Math.random() * hiraganaLength);
-  const questionObject = hiragana[hiraganaKeys[randomNumber]];
-  return questionObject;
+// Shuffle a list. This takes the list and looks for either a positive or negative number to move the item 'up' or 'down' in the array. This isn't a perfect way to shuffle, but it works.
+const theShuffler = (array) => {
+  const shuffledStuff = array.sort((a, b) => 0.5 - Math.random());
+  return shuffledStuff;
 };
 
-// takes the questionObject and creates the fullQuestion array
-const getAnswers = () => {
-  // define the array
-  let fullQuestion = [];
-  // get the questionObject
-  const question = getQuestionObject();
-  // add the question (fullQuestion[0])
-  fullQuestion.push(question.ja);
-  // add the correct answer (fullQuestion[1])
-  fullQuestion.push(question.en);
-  // get the first wrong answer and push if it's not a duplicate
-  let wrongAnswer1 = getQuestionObject();
-  if (fullQuestion.includes(wrongAnswer1.en)) {
-    wrongAnswer1 = getQuestionObject();
-  } else {
-    fullQuestion.push(wrongAnswer1.en);
-  }
-  // get the second wrong answer and push if it's not a duplicate
-  let wrongAnswer2 = getQuestionObject();
-  if (fullQuestion.includes(wrongAnswer2.en)) {
-    wrongAnswer2 = getQuestionObject();
-  } else {
-    fullQuestion.push(wrongAnswer2.en);
-  }
-  // get the third wrong answer and push if it's not a duplicate
-  let wrongAnswer3 = getQuestionObject();
-  if (fullQuestion.includes(wrongAnswer3.en)) {
-    wrongAnswer3 = getQuestionObject();
-  } else {
-    fullQuestion.push(wrongAnswer3.en);
-  }
-  return fullQuestion;
-}
+// Gets a random answer from the list
+const getRandomAnswer = () => {
+  const randomNumber = Math.floor(Math.random() * 46);
+  const randomAnswer = questionList[randomNumber][0];
+  return randomAnswer;
+};
 
-export {getAnswers};
+// Create the Shuffled Questions List
+// TODO: Add function to create a custom list based on settings
+// hiragana/katakana read like: [['a', 'あ'],[etc.]]
+export const questionList = theShuffler(hiragana);
+
+// Create the quiz questions. Takes in questionList and loops over it, creating a question (['あ', 'a', ['ta', 'chi', 'ke', 'a']]) for each, with unique values. Then shuffles the answers list and pushes them to quizList.
+export const quizMaker = (array) => {
+  const quizList = [];
+  array.forEach(element => {
+    const finalQuestion = [element[1], element[0]];
+    const answerList = [element[0]];
+    let counter = 0;
+    do {
+      let random = getRandomAnswer();
+      if (!answerList.includes(random)) {
+        answerList.push(random);
+        counter ++;
+      };
+    } while (counter < 3);
+    finalQuestion.push(answerList);
+    quizList.push(finalQuestion);
+  });
+  return quizList;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// PSEUDOCODE
+
+// Get the list of quiz questions (en/ja pairs)
+// For each question
+//    copy the 'en' to a new array
+//    push 3 random unique answers to the new array
+//    shuffle the answers array
+//    create an array that's ['question', 'corr-ans',   ['ans1', 'ans2', 'ans3', 'ans4']]
+// Push each complete question/answer to a new Quiz
