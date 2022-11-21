@@ -9,9 +9,7 @@ const TestPage: NextPage = (props) => {
   }
 
   return (
-    <div className="flex flex-col items-start justify-start bg-slate-300 p-4 gap-4 text-center">
-      <h1 className="text-center w-full">Sandbox</h1>
-
+    <div>
       <QuizCard />
     </div>
   )
