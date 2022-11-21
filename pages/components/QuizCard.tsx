@@ -8,7 +8,7 @@ export const QuizCard = () => {
   const [answer3, setAnswer3] = useState();
   const [answer4, setAnswer4] = useState();
   const [quizStarted, setQuizStarted] = useState(false);
-  const [colorClass, setColorClass] = useState('bg-slate-200');
+  const answerCardClasses = "p-4 border border-solid rounded w-full transition-colors bg-blue-200 border-blue-800";
 
   // This sets the initial state of the quizHandler, based on quizList.
   const quizHandler = () => {
@@ -18,7 +18,6 @@ export const QuizCard = () => {
     setAnswer3(quizList[0][2][2]);
     setAnswer4(quizList[0][2][3]);
     setQuizStarted(true);
-    console.log(quizList)
   };
 
   // This increments whenever an answer is processed, and moves to the next question in the quizList. Also updates the question and answer values.
@@ -27,8 +26,6 @@ export const QuizCard = () => {
   const increment = () => {
     counter.current = counter.current + 1;
     setCount(counter.current);
-    console.log(counter.current, "after increment");
-    setColorClass('bg-slate-200')
     setQuestion(quizList[counter.current][0]);
     setAnswer1(quizList[counter.current][2][0]);
     setAnswer2(quizList[counter.current][2][1]);
@@ -37,18 +34,13 @@ export const QuizCard = () => {
   };
 
   const answerHandler = (e) => {
-    // increment();
-    console.log(e.target.innerText);
     if (e.target.innerText === quizList[counter.current][1]) {
-      setColorClass('bg-green-800');
-    } else {
-      setColorClass('bg-red-800');
-    };
-    setTimeout(() => {
       increment();
-    }, 1000);
+    } else {
+      e.target.innerText = "X"
+      // return;
+    };
   };
-
 
   return (
     <div className="flex flex-col items-center justify-center bg-slate-300 p-4 gap-4 w-full">
@@ -57,12 +49,12 @@ export const QuizCard = () => {
         <h5 className="font-bold text-xl bg-blue-200 border-2 border-solid border-blue-800 p-4 w-full rounded">{question}</h5>
       </div>
       <div className="flex items-center justify-center gap-4 bg-pink-200 w-full">
-        <button className={`p-4 border border-solid rounded w-full transition-colors ${colorClass}`} onClick={answerHandler}>{answer1}</button>
-        <button className="p-4 bg-blue-200 border border-solid border-blue-800 rounded w-full">{answer2}</button>
+        <button className={answerCardClasses} onClick={answerHandler}>{answer1}</button>
+        <button className={answerCardClasses} onClick={answerHandler}>{answer2}</button>
       </div>
       <div className="flex items-center justify-center gap-4 bg-orange-200 w-full">
-        <button className="p-4 bg-blue-200 border border-solid border-blue-800 rounded w-full">{answer3}</button>
-        <button className="p-4 bg-blue-200 border border-solid border-blue-800 rounded w-full">{answer4}</button>
+        <button className={answerCardClasses} onClick={answerHandler}>{answer3}</button>
+        <button className={answerCardClasses} onClick={answerHandler}>{answer4}</button>
       </div>
       {quizStarted && <p className="w-100 text-center">Question: {count + 1}/{quizList.length}</p>}
     </div>

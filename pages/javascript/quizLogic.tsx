@@ -13,11 +13,11 @@ const theShuffler = (array) => {
 /**
  * Gets a random answer from the quiz data.
  * returns string
- * FUTURE: update so that the '46' is based on the length of the quiz data list
+ * FUTURE: update so that the '46' is based on the length of the quiz data list - update typescript
  *
  */
-const getRandomAnswer = (array) => {
-  const randomNumber = Math.floor(Math.random() * 46);
+const getRandomAnswer = (array, length) => {
+  const randomNumber = Math.floor(Math.random() * length);
   const randomAnswer = array[randomNumber][0];
   return randomAnswer;
 };
@@ -39,7 +39,7 @@ const quizMaker = (array) => {
     const answerList = [element[0]];
     let counter = 0;
     do {
-      let random = getRandomAnswer(array);
+      let random = getRandomAnswer(array, 46);
       if (!answerList.includes(random)) {
         answerList.push(random);
         counter ++;
