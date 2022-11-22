@@ -3,7 +3,7 @@ import { QuizCard } from "./components/QuizCard";
 
 const TestPage: NextPage = (props) => {
   return (
-    <div>
+    <div className="app-wrap">
       <QuizCard />
     </div>
   )

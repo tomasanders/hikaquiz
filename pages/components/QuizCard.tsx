@@ -14,7 +14,7 @@ export const QuizCard = () => {
   const [answer2Style, setAnswer2Style] = useState('bg-[#F7B85C]');
   const [answer3Style, setAnswer3Style] = useState('bg-[#F7B85C]');
   const [answer4Style, setAnswer4Style] = useState('bg-[#F7B85C]');
-  const [correct, setCorrect] = useState('');
+  const [correct, setCorrect] = useState('opacity-0');
 
   // This sets the initial state of the quizHandler, based on quizList.
   const quizHandler = () => {
@@ -33,7 +33,7 @@ export const QuizCard = () => {
     counter.current = counter.current + 1;
     setCount(counter.current);
     setTimeout(() => {
-      setCorrect('');
+      setCorrect('opacity-0');
       setAnswer1Style('bg-default');
       setAnswer2Style('bg-default');
       setAnswer3Style('bg-default');
@@ -50,7 +50,7 @@ export const QuizCard = () => {
   const answer1Handler = (e) => {
     if (e.target.innerText === quizList[counter.current][1]) {
       setAnswer1Style('bg-correct');
-      setCorrect("Correct!");
+      setCorrect('opacity-1');
       increment();
     } else {
       setAnswer1Style('bg-incorrect');
@@ -59,7 +59,7 @@ export const QuizCard = () => {
   const answer2Handler = (e) => {
     if (e.target.innerText === quizList[counter.current][1]) {
       setAnswer2Style('bg-correct');
-      setCorrect("Correct!");
+      setCorrect('opacity-1');
       increment();
     } else {
       setAnswer2Style('bg-incorrect');
@@ -68,7 +68,7 @@ export const QuizCard = () => {
   const answer3Handler = (e) => {
     if (e.target.innerText === quizList[counter.current][1]) {
       setAnswer3Style('bg-correct');
-      setCorrect("Correct!");
+      setCorrect('opacity-1');
       increment();
     } else {
       setAnswer3Style('bg-incorrect');
@@ -77,7 +77,7 @@ export const QuizCard = () => {
   const answer4Handler = (e) => {
     if (e.target.innerText === quizList[counter.current][1]) {
       setAnswer4Style('bg-correct');
-      setCorrect("Correct!");
+      setCorrect('opacity-1');
       increment();
     } else {
       setAnswer4Style('bg-incorrect');
@@ -90,7 +90,7 @@ export const QuizCard = () => {
       <button className="start-btn" onClick={quizHandler}>START</button>
       <div className="question-wrap">
         <h5>{question}</h5>
-        <h5 className="correct-msg">{correct}</h5>
+        <h5 className={`correct-msg ${correct}`}>Correct!</h5>
       </div>
       <div className="answer-wrap">
         <button className={`answer-tile ${answer1Style}`} onClick={answer1Handler}>{answer1}</button>
@@ -100,7 +100,10 @@ export const QuizCard = () => {
         <button className={`answer-tile ${answer3Style}`} onClick={answer3Handler}>{answer3}</button>
         <button className={`answer-tile ${answer4Style}`} onClick={answer4Handler}>{answer4}</button>
       </div>
-      {quizStarted && <p className="question-count">QUESTION: {count + 1}/{quizList.length}</p>}
+      <div className="score-wrap">
+        {quizStarted && <p className="question-count">QUESTION: {count + 1}/{quizList.length}</p>}
+        {quizStarted && <p className="score">SCORE: <span className="correct-text">1</span><span className="incorrect-text">1</span><span>50%</span></p>}
+      </div>
     </div>
   );
 };
