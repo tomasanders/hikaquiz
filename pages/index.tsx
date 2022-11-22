@@ -4,7 +4,7 @@ import Head from 'next/head'
 const Home: NextPage = () => {
 
   return (
-    <div className="flex flex-col items-center h-screen w-screen bg-slate-700">
+    <div className="app-wrap">
       <Head>
         <title>HiKaQuiz</title>
         <meta name="description" content="A Simple Hiragana and Katakana Quiz" />
