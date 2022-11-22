@@ -152,8 +152,8 @@ export const QuizCard = () => {
       <button className="start-btn" onClick={quizHandler}>START</button>
       <div className="question-wrap">
         <h5>{qText}</h5>
-        <h5 className={`correct-msg ${correctMsg}`}>Correct!</h5>
-        <h5 className={`correct-msg ${incorrectMsg}`}>Too Bad!</h5>
+        <h5 className={`correct-msg shadow-correct ${correctMsg}`}>Correct!</h5>
+        <h5 className={`correct-msg shadow-incorrect ${incorrectMsg}`}>Too Bad!</h5>
       </div>
       <div className="answer-wrap">
         <button className={`answer-tile ${a1TextStyle}`} onClick={a1TextHandler}>{a1Text}</button>

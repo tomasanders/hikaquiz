@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
 
 // Palette
 $bg: #FEECCA;
@@ -10,7 +10,7 @@ $incorrect: #E4724E;
 // End Palette
 // Utility Variables
 $box-shadow: 4px 4px $black;
-$text-shadow: 2px 2px $white;
+$text-shadow: 3px 3px $black;
 $border: 2px solid #000;
 // Utility Variables
 
@@ -77,6 +77,14 @@ body {background: $bg;}
   transition: all .9s ease-in-out;
 }
 
+.shadow-incorrect {
+  text-shadow: 4px 4px $incorrect;
+}
+
+.shadow-correct {
+  text-shadow: 4px 4px $correct;
+}
+
 .question-count {
   color: $black;
   font-size: 1.5rem;
@@ -93,6 +101,8 @@ body {background: $bg;}
   font-weight: 900;
   padding: .5rem 1rem;
   width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
 }
 
 .title {
@@ -113,6 +123,7 @@ body {background: $bg;}
   justify-content: flex-start;
   padding: 1rem;
   width: 100vw;
+  color: $black;
 }
 
 .app-wrap {
@@ -120,7 +131,7 @@ body {background: $bg;}
   background: $bg;
   display: flex;
   flex-direction: column;
-  font-family: 'Rampart One', cursive;
+  font-family: 'RocknRoll One', sans-serif;
   height: 100vh;
   width: 100vw;
 }
@@ -131,7 +142,11 @@ body {background: $bg;}
   flex-direction: column;
   gap: .5rem;
   justify-content: flex-start;
+  box-shadow: $box-shadow;
+  border: $border;
+  background: $white;
   width: 100%;
+  font-family: 'Courier New', Courier, monospace;
 
   p {margin: 0;}
 }
@@ -143,4 +158,5 @@ body {background: $bg;}
   font-weight: 900;
   gap: .75rem;
   justify-content: flex-start;
+  font-size: 1.5rem;
 }
