@@ -32,7 +32,7 @@ export const QuizCard = () => {
   const incorrectCounter = useRef(0);
   const [qIncorrect, setQIncorrect] = useState(incorrectCounter.current);
   // Calculates the score
-  const qScore = ((correctCounter.current / (correctCounter.current + incorrectCounter.current)) * 100).toFixed(2);
+  const [qScore, setQScore] = useState(0);
 
   // Sets the initial state of the quizHandler, based on quizList.
   const quizHandler = () => {
@@ -55,6 +55,7 @@ export const QuizCard = () => {
     setTimeout(() => {
       setCorrectMsg('opacity-0');
       setIncorrectMsg('opacity-0');
+      setQScore(Math.round(((correctCounter.current / (correctCounter.current + incorrectCounter.current)) * 100)));
       setA1TextStyle('bg-default');
       setA2TextStyle('bg-default');
       setA3TextStyle('bg-default');
@@ -163,17 +164,15 @@ export const QuizCard = () => {
         <button className={`answer-tile ${a3TextStyle}`} onClick={a3TextHandler}>{a3Text}</button>
         <button className={`answer-tile ${a4TextStyle}`} onClick={a4TextHandler}>{a4Text}</button>
       </div>
-      <div className="score-wrap">
-        {quizStarted && <p className="question-count">QUESTION: {count + 1}/{quizList.length}</p>}
-        {quizStarted &&
-          <p className="score">
+      {quizStarted && <div className="score-wrap">
+        <p className="question-count">QUESTION: {count + 1}/{quizList.length}</p>
+        <p className="score">
             SCORE:
             <span className="correct-text">{qCorrect}</span>
             <span className="incorrect-text">{qIncorrect}</span>
             <span>{qScore}%</span>
           </p>
-        }
-      </div>
+      </div>}
     </div>
   );
 };
