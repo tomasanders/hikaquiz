@@ -2,61 +2,49 @@ import { hiragana, hiraganaContractions, hiraganaDakuten, hiraganaDakutenContrac
 import { katakana, katakanaContractions, katakanaDakuten, katakanaDakutenContractions } from "../data/katakana";
 
 /**
- * Shuffles an array
- * returns array (nested)
+ * Takes an array, shuffles it, and returns it.
  */
-const theShuffler = (array: any): string[] => {
-  const shuffledStuff: string[] = array.sort((a, b) => 0.5 - Math.random());
-  return shuffledStuff;
+const getShuffledArray = (array: any): any => {
+  return array.sort((a, b) => 0.5 - Math.random());
 };
 
 /**
- * Gets a random answer from the quiz data.
- * returns string
+ * Takes an array and returns a random element.
  */
-const getRandomAnswer = (array: any) => {
-  const length: number = array.length;
-  const randomNumber: number = Math.floor(Math.random() * length);
-  const randomAnswer: string = array[randomNumber][0];
-  return randomAnswer;
+const getRandomAnswer = (array: string[][]) => {
+  const randomNumber: number = Math.floor(Math.random() * (array.length));
+  return array[randomNumber][0];
 };
 
 /**
- * Creates a list of quiz entries, each containing the question (kana), correct answer (en), and an array of 4 answers (one correct, three incorrect).
- *
- * Takes in an array (questionList) -> shuffled via theShuffler()
- *
+ * Takes an array of questions and a number of possible answers.
+ * Creates a list of quiz entries, each containing the question (kana), correct answer (en), and an array of <number> answers (one correct, rest incorrect).
  * Returns an array of arrays. Each inner array is a quiz entry, which reads like: [['あ', 'a', ['be', 'to', 'ka', 'a']], etc.].
- * returns array (nested)
- *
- * FUTURE: update 'counter' to change based on how many answer choices the user selects
  */
-const quizMaker = (array: any) => {
-  let quizList: any = [];
+const createQuiz = (array: string[][], count: number) => {
+  const quizContents: string[] = [];
   array.forEach(element => {
-    const finalQuestion = [element[1], element[0]];
-    const answerList = [element[0]];
+    const answerList: string[] = [element[0]];
     let counter = 0;
     do {
-      let random: string = getRandomAnswer(array);
-      if (!answerList.includes(random)) {
-        answerList.push(random);
+      let randomAnswer: string = getRandomAnswer(array);
+      if (!answerList.includes(randomAnswer)) {
+        answerList.push(randomAnswer);
         counter ++;
       };
-    } while (counter < 3); // ensures 4 answer choices
-    const shuffledAnswers = theShuffler(answerList);
-    finalQuestion.push(shuffledAnswers);
-    quizList.push(finalQuestion);
+    } while (counter < count); // ensures 4 answer choices
+    const quizQuestion: any = [element[1], element[0], getShuffledArray(answerList)];
+    quizContents.push(quizQuestion);
   });
-  return quizList;
+  return quizContents;
 };
 
 /**
  * Starts the quiz - prepares all the data
  */
 const startQuiz = () => {
-  const shuffledQuiz: string[] = theShuffler(hiragana);
-  const quizList: string[] = quizMaker(shuffledQuiz);
+  const shuffledData: string[][] = getShuffledArray(hiragana);
+  const quizList: string[] | string[][] = createQuiz(shuffledData, 3);
   return quizList;
 };
 
