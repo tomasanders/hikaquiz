@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { QuizCard } from '../.next/src/components/QuizCard'
+import { QuizCard } from '../src/components/QuizCard'
 
 const Home: NextPage = () => {
 

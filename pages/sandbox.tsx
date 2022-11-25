@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import { quizList } from "../.next/src/javascript/quizLogic";
+import { quizList } from "../src/javascript/QuizLogic";
 import { useState, useRef } from "react";
-import { QuestionFrame } from "../.next/src/components/QuestionFrame";
-import { AnswerFrame } from "../.next/src/components/AnswerFrame";
+import { QuestionFrame } from "../src/components/QuestionFrame";
+import { AnswerFrame } from "../src/components/AnswerFrame";
 
 const TestPage: NextPage = (props) => {
   const [question, setQuestion] = useState();
