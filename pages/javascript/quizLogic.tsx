@@ -1,24 +1,23 @@
-import { hiragana } from "../data/hiragana";
-import { katakana } from "../data/katakana";
+import { hiragana, hiraganaContractions, hiraganaDakuten, hiraganaDakutenContractions } from "../data/hiragana";
+import { katakana, katakanaContractions, katakanaDakuten, katakanaDakutenContractions } from "../data/katakana";
 
 /**
  * Shuffles an array
  * returns array (nested)
  */
-const theShuffler = (array) => {
-  const shuffledStuff = array.sort((a, b) => 0.5 - Math.random());
+const theShuffler = (array: any): string[] => {
+  const shuffledStuff: string[] = array.sort((a, b) => 0.5 - Math.random());
   return shuffledStuff;
 };
 
 /**
  * Gets a random answer from the quiz data.
  * returns string
- * FUTURE: update so that the '46' is based on the length of the quiz data list - update typescript
- *
  */
-const getRandomAnswer = (array, length) => {
-  const randomNumber = Math.floor(Math.random() * length);
-  const randomAnswer = array[randomNumber][0];
+const getRandomAnswer = (array: any) => {
+  const length: number = array.length;
+  const randomNumber: number = Math.floor(Math.random() * length);
+  const randomAnswer: string = array[randomNumber][0];
   return randomAnswer;
 };
 
@@ -32,14 +31,14 @@ const getRandomAnswer = (array, length) => {
  *
  * FUTURE: update 'counter' to change based on how many answer choices the user selects
  */
-const quizMaker = (array) => {
-  const quizList = [];
+const quizMaker = (array: any) => {
+  let quizList: any = [];
   array.forEach(element => {
     const finalQuestion = [element[1], element[0]];
     const answerList = [element[0]];
     let counter = 0;
     do {
-      let random = getRandomAnswer(array, 46);
+      let random: string = getRandomAnswer(array);
       if (!answerList.includes(random)) {
         answerList.push(random);
         counter ++;
@@ -56,8 +55,8 @@ const quizMaker = (array) => {
  * Starts the quiz - prepares all the data
  */
 const startQuiz = () => {
-  const shuffledQuiz = theShuffler(hiragana);
-  const quizList = quizMaker(shuffledQuiz);
+  const shuffledQuiz: string[] = theShuffler(hiragana);
+  const quizList: string[] = quizMaker(shuffledQuiz);
   return quizList;
 };
 

@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { QuizCard } from './components/QuizCard'
 
 const Home: NextPage = () => {
 
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <button>Click</button>
+      <QuizCard />
     </div>
   )
 }

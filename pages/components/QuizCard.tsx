@@ -1,5 +1,6 @@
 import { quizList } from "../javascript/quizLogic";
 import { useState, useRef } from "react";
+import { QuestionFrame } from "./QuestionFrame";
 
 export const QuizCard = () => {
 
@@ -151,11 +152,8 @@ export const QuizCard = () => {
     <div className="quiz-wrap">
       <h1 className="title">HiKa QUIZ</h1>
       <button className="start-btn" onClick={quizHandler}>START</button>
-      <div className="question-wrap">
-        <h5>{qText}</h5>
-        <h5 className={`correct-msg shadow-correct ${correctMsg}`}>Correct!</h5>
-        <h5 className={`correct-msg shadow-incorrect ${incorrectMsg}`}>Too Bad!</h5>
-      </div>
+      <QuestionFrame question={qText} correctMsg={correctMsg} incorrectMsg={incorrectMsg} />
+
       <div className="answer-wrap">
         <button className={`answer-tile ${a1TextStyle}`} onClick={a1TextHandler}>{a1Text}</button>
         <button className={`answer-tile ${a2TextStyle}`} onClick={a2TextHandler}>{a2Text}</button>
