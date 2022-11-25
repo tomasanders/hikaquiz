@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import { quizList } from "./javascript/quizLogic";
+import { quizList } from "../.next/src/javascript/quizLogic";
 import { useState, useRef } from "react";
-import { QuestionFrame } from "./components/QuestionFrame";
-import { AnswerFrame } from "./components/AnswerFrame";
+import { QuestionFrame } from "../.next/src/components/QuestionFrame";
+import { AnswerFrame } from "../.next/src/components/AnswerFrame";
 
 const TestPage: NextPage = (props) => {
   const [question, setQuestion] = useState();
@@ -22,7 +22,7 @@ const TestPage: NextPage = (props) => {
         <button className="start-btn" onClick={quizHandler}>START</button>
         <QuestionFrame question={question} correctMsg={correctOpacity} incorrectMsg={incorrectOpacity} />
         <div className="answer-wrap">
-          <AnswerFrame color={'bg-default'} 
+          <AnswerFrame color={'bg-default'}
         </div>
       </div>
     </div>
