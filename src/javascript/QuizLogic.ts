@@ -42,22 +42,21 @@ const createQuiz = (array: string[][], count: number) => {
 /**
  * Starts the quiz - prepares all the data
  */
-export const prepareQuiz = (content: string, batchSize: number) => {
+const prepareQuiz = (content: string, batchSize: number) => {
+  let quizList: string[] | string[][] = [];
+  let shuffledData: string[][];
   if (content === "both") {
     const combinedKana = hiragana.concat(katakana);
-    const shuffledData: string[][] = getShuffledArray(combinedKana);
-    const quizList: string[] | string[][] = createQuiz(shuffledData, batchSize);
-    console.log(quizList, "bothList")
-    return quizList;
+    shuffledData = getShuffledArray(combinedKana);
+    quizList = createQuiz(shuffledData, batchSize);
   } else if (content === "hiragana") {
-    const shuffledData: string[][] = getShuffledArray(hiragana);
-    const quizList: string[] | string[][] = createQuiz(shuffledData, batchSize);
-    console.log(quizList, "hiraganaList")
-    return quizList;
+    shuffledData = getShuffledArray(hiragana);
+    quizList = createQuiz(shuffledData, batchSize);
   } else if (content === "katakana") {
-    const shuffledData: string[][] = getShuffledArray(katakana);
-    const quizList: string[] | string[][] = createQuiz(shuffledData, batchSize);
-    console.log(quizList, "katakanaList")
-    return quizList;
+    shuffledData = getShuffledArray(katakana);
+    quizList = createQuiz(shuffledData, batchSize);
   };
+  return quizList;
 };
+
+export { prepareQuiz };

@@ -92,6 +92,14 @@ h6 {
   background: $correct;
 }
 
+.bg-incorrect {
+  background: $incorrect;
+}
+
+.bg-default {
+  background: $foreground;
+}
+
 // Wraps all the content (outermost <div>)
 .app {
   height: 100%;
@@ -174,11 +182,11 @@ h6 {
     font-size: 2rem;
   }
 
-  .pb-4 {
+  .pb-3 {
     padding-block: 3rem;
   }
 
-  .pb-8 {
+  .pb-7 {
     padding-block: 1.5rem;
   }
 }
