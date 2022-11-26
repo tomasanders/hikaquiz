@@ -6,6 +6,7 @@ const TestPage: NextPage = (props) => {
   const [batchSize, setBatchSize] = useState(3); // Sets the number of possible answer tiles.
   const [quizStarted, setQuizStarted] = useState(false); // Sets the quiz as started/not started.
   const [quizContent, setQuizContent] = useState('hiragana'); // Sets the quiz content.
+  const [font, setFont] = useState('ff-rock')
 
   const counter = useRef(0); // useRef to preserve the value between refreshes.
   const [count, setCount] = useState(counter.current);
@@ -51,8 +52,6 @@ const TestPage: NextPage = (props) => {
     };
   };
 
-
-
   function handleAnswer(id: number, counter: number) {
     switch(id) {
       case 0:
@@ -86,7 +85,7 @@ const TestPage: NextPage = (props) => {
    * Sets up the initial state of the quiz.
    * Pulls data from QuizLogic.ts, toggles the quiz display, and sets the first question.
    */
-     function startQuiz() {
+    function startQuiz() {
       masterList.push(prepareQuiz(quizContent, batchSize));
       setQuizStarted(true);
       firstQuestion();
@@ -116,9 +115,16 @@ const TestPage: NextPage = (props) => {
               <button className={`${quizContent === 'both' ? 'bg-correct' : 'bg-white'}`} onClick={() => setQuizContent('both')}>ひ+カ</button>
             </div>
 
+            <p>Which font style would you like?</p>
+            <div className="flex-group">
+              <button className={`${font === 'ff-rock' ? 'bg-correct' : 'bg-white'} ff-rock`} onClick={() => setFont('ff-rock')}>ひカ</button>
+              <button className={`${font === 'ff-mono' ? 'bg-correct' : 'bg-white'} ff-mono`} onClick={() => setFont('ff-mono')}>ひカ</button>
+              <button className={`${font === 'ff-noto' ? 'bg-correct' : 'bg-white'} ff-noto`} onClick={() => setFont('ff-noto')}>ひカ</button>
+            </div>
+
           </div>
 
-          <button className={"btn"} onClick={startQuiz}>START QUIZ</button>
+          <button className="btn" onClick={startQuiz}>START QUIZ</button>
         </div>
       }
       {/* End Options Menu */}
@@ -129,7 +135,7 @@ const TestPage: NextPage = (props) => {
 
           {/* Question Frame */}
           <div className="question flex-group">
-            <span className="question__text">
+            <span className={`question__text ${font}`}>
               {question}
             </span>
           </div>
@@ -157,7 +163,7 @@ const TestPage: NextPage = (props) => {
 
       {/* Return to Options Button - shows when quiz started */}
       {quizStarted === true &&
-        <button className="btn" onClick={() => setQuizStarted(false)}>
+        <button className="btn ff-mono" onClick={() => setQuizStarted(false)}>
           BACK TO OPTIONS
         </button>
       }
@@ -172,3 +178,6 @@ const TestPage: NextPage = (props) => {
 };
 
 export default TestPage;
+
+
+// TODO: implement increment() function.

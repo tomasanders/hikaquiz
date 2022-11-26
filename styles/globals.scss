@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Roboto+Mono&family=RocknRoll+One&family=Sawarabi+Gothic&display=swap');
-// font-family: 'Mochiy Pop P One', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Roboto+Mono&family=RocknRoll+One&display=swap');
+// font-family: 'Noto Serif JP', serif;
 // font-family: 'Roboto Mono', monospace;
 // font-family: 'RocknRoll One', sans-serif;
-// font-family: 'Sawarabi Gothic', sans-serif;
 
 // Custom Properties
-$correct: #B0CDB0;    // rgb(176, 205, 176)
-$incorrect: #E99370;  // rgb(233, 147, 112)
-$background: #F0E6E7; // rgb(240, 230, 231)
-$foreground: #EAC30D; // rgb(234, 195, 13)
+$correct: #34C1AA;    // rgb(176, 205, 176)
+$incorrect: #E4724E;  // rgb(233, 147, 112)
+$background: #FEECCA; // rgb(240, 230, 231)
+$foreground: #F7B85C; // rgb(234, 195, 13)
 $white: #FFF;         // rgb(255, 255, 255)
 $black: #000;         // rgb(0, 0, 0)
 
@@ -34,10 +33,11 @@ html,
 body,
 #__next {
   height: 100%;
-  font-family: 'Mochiy Pop P One', sans-serif;
+  font-family: 'RocknRoll One', sans-serif;
 
   p {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
   }
 }
 // Typographic tweaks!
@@ -109,8 +109,11 @@ h6 {
 
   // HiKa QUIZ
   &__title {
-    font-size: 3rem;
+    font-size: 4rem;
+    font-weight: 900;
     margin-bottom: 1rem;
+    text-shadow: 4px 4px rgba(0, 0, 0, 0.5);
+    color: $black;
   }
 }
 
@@ -118,7 +121,7 @@ h6 {
 .options {
 
   &__menu {
-    background: $white;
+    background: $foreground;
     border: $border;
     box-shadow: $box-shadow;
     padding: 1rem;
@@ -167,6 +170,21 @@ h6 {
   &__text {
     font-size: 5rem;
   }
+}
+
+.ff-rock {
+  font-family: 'RocknRoll One', sans-serif;
+  font-weight: 900;
+}
+
+.ff-mono {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
+}
+
+.ff-noto {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
 }
 
 // Answers Wrapper
