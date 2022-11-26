@@ -42,10 +42,10 @@ const createQuiz = (array: string[][], count: number) => {
 /**
  * Starts the quiz - prepares all the data
  */
-const startQuiz = () => {
-  const shuffledData: string[][] = getShuffledArray(hiragana);
-  const quizList: string[] | string[][] = createQuiz(shuffledData, 3);
+const startQuiz = (array: string[][], batchSize: number) => {
+  const shuffledData: string[][] = getShuffledArray(array);
+  const quizList: string[] | string[][] = createQuiz(shuffledData, batchSize);
   return quizList;
 };
 
-export const quizList = startQuiz();
+export const quizList = startQuiz(hiragana, 3);
