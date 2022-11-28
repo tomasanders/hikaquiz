@@ -262,91 +262,90 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="app-wrap">
+    <div className="app">
       <Head>
         <title>ひカ</title>
         <meta name="description" content="A Simple Hiragana and Katakana Quiz" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="app">
-        <h1 className="app__title">HiKa QUIZ</h1>
+      <h1 className="app__title">HiKa QUIZ</h1>
 
-        {/* Options Menu */}
-        { started === false &&
-          <div className="options">
-            <div className="options__menu">
-              <p className="options__header">OPTIONS</p>
+      {/* Options Menu */}
+      { started === false &&
+        <div className="options">
+          <div className="options__menu">
+            <p className="options__header">OPTIONS</p>
 
-              <p>Number of Possible Answers</p>
-              <div className="flex-group">
-                <button className={`${batch === 3 ? 'bg-correct' : 'bg-white'}`} onClick={() => setBatch(3)}>4</button>
-                <button className={`${batch === 7 ? 'bg-correct' : 'bg-white'}`} onClick={() => setBatch(7)}>8</button>
-              </div>
-
-              <p>Quiz Contents</p>
-              <div className="flex-group">
-                <button className={`${content === 'hiragana' ? 'bg-correct' : 'bg-white'}`} onClick={() => setContent('hiragana')}>ひ</button>
-                <button className={`${content === 'katakana' ? 'bg-correct' : 'bg-white'}`} onClick={() => setContent('katakana')}>カ</button>
-                <button className={`${content === 'both' ? 'bg-correct' : 'bg-white'}`} onClick={() => setContent('both')}>ひ+カ</button>
-              </div>
-
-              <p>Font Style</p>
-              <div className="flex-group">
-                <button className={`${font === 'ff-rock' ? 'bg-correct' : 'bg-white'} ff-rock`} onClick={() => setFont('ff-rock')}>ひカ</button>
-                <button className={`${font === 'ff-mono' ? 'bg-correct' : 'bg-white'} ff-mono`} onClick={() => setFont('ff-mono')}>ひカ</button>
-                <button className={`${font === 'ff-noto' ? 'bg-correct' : 'bg-white'} ff-noto`} onClick={() => setFont('ff-noto')}>ひカ</button>
-              </div>
+            <p>Number of Possible Answers</p>
+            <div className="flex-group">
+              <button className={`${batch === 3 ? 'bg-correct' : 'bg-white'}`} onClick={() => setBatch(3)}>4</button>
+              <button className={`${batch === 7 ? 'bg-correct' : 'bg-white'}`} onClick={() => setBatch(7)}>8</button>
             </div>
-            <button className="btn" onClick={startQuiz}>START QUIZ</button>
+
+            <p>Quiz Contents</p>
+            <div className="flex-group">
+              <button className={`${content === 'hiragana' ? 'bg-correct' : 'bg-white'}`} onClick={() => setContent('hiragana')}>ひ</button>
+              <button className={`${content === 'katakana' ? 'bg-correct' : 'bg-white'}`} onClick={() => setContent('katakana')}>カ</button>
+              <button className={`${content === 'both' ? 'bg-correct' : 'bg-white'}`} onClick={() => setContent('both')}>ひ+カ</button>
+            </div>
+
+            <p>Font Style</p>
+            <div className="flex-group">
+              <button className={`${font === 'ff-rock' ? 'bg-correct' : 'bg-white'} ff-rock`} onClick={() => setFont('ff-rock')}>ひカ</button>
+              <button className={`${font === 'ff-mono' ? 'bg-correct' : 'bg-white'} ff-mono`} onClick={() => setFont('ff-mono')}>ひカ</button>
+              <button className={`${font === 'ff-noto' ? 'bg-correct' : 'bg-white'} ff-noto`} onClick={() => setFont('ff-noto')}>ひカ</button>
+            </div>
           </div>
-        }
-        {/* End Options Menu */}
+          <button className="btn ff-mono" onClick={startQuiz}>START QUIZ</button>
+        </div>
+      }
+      {/* End Options Menu */}
 
-        {/* Quiz Wrapper */}
-        {started === true &&
-          <div className="quiz">
-            {/* Question Section */}
-            <div className="question flex-group">
-              <span className={`question__text ${font}`}>{question}</span>
-              <span className={`question__msg shadow-correct ${correctMsg}`}>Correct!</span>
-              <span className={`question__msg shadow-incorrect ${tryAgainMsg}`}>Try Again!</span>
-              <span className={`question__msg shadow-incorrect ${incorrectMsg}`}>Too Bad...</span>
-            </div>
-            {/* End Question Section */}
-
-            {/* Answer Section */}
-            <div className="answers">
-              <button className={`pb-${batch} bg-${a0Bg}`} onClick={(e) => handleAnswer(0)}>{a0}</button>
-              <button className={`pb-${batch} bg-${a1Bg}`} onClick={(e) => handleAnswer(1)}>{a1}</button>
-              <button className={`pb-${batch} bg-${a2Bg}`} onClick={(e) => handleAnswer(2)}>{a2}</button>
-              <button className={`pb-${batch} bg-${a3Bg}`} onClick={(e) => handleAnswer(3)}>{a3}</button>
-              { batch === 7 &&
-                <>
-                  <button className={`pb-7 bg-${a4Bg}`} onClick={(e) => handleAnswer(4)}>{a4}</button>
-                  <button className={`pb-7 bg-${a5Bg}`} onClick={(e) => handleAnswer(5)}>{a5}</button>
-                  <button className={`pb-7 bg-${a6Bg}`} onClick={(e) => handleAnswer(6)}>{a6}</button>
-                  <button className={`pb-7 bg-${a7Bg}`} onClick={(e) => handleAnswer(7)}>{a7}</button>
-                </>
-              }
-            </div>
-            {/* End Answer Section */}
-
-            {/* Scorekeeping Section */}
-            <div className="score">
-              <p className="score__count">QUESTION: {counter.current + 1}/{list.current.length}</p>
-              <p className="score__details">
-                SCORE:
-                <span className="score__correct">{scoreCorrect}</span>
-                <span className="score__incorrect">{scoreIncorrect}</span>
-                <span>{score}%</span>
-              </p>
-            </div>
-            {/* End Scorekeeping Section */}
+      {/* Quiz Wrapper */}
+      {started === true &&
+        <div className="quiz">
+          {/* Question Section */}
+          <div className="question flex-group">
+            <span className={`question__text ${font}`}>{question}</span>
+            <span className={`question__msg shadow-correct ${correctMsg}`}>Correct!</span>
+            <span className={`question__msg shadow-incorrect ${tryAgainMsg}`}>Try Again!</span>
+            <span className={`question__msg shadow-incorrect ${incorrectMsg}`}>Too Bad...</span>
           </div>
-        }
-        {/* End Quiz Wrapper */}
-      </div>
+          {/* End Question Section */}
+
+          {/* Answer Section */}
+          <div className="answers">
+            <button className={`pb-${batch} bg-${a0Bg}`} onClick={(e) => handleAnswer(0)}>{a0}</button>
+            <button className={`pb-${batch} bg-${a1Bg}`} onClick={(e) => handleAnswer(1)}>{a1}</button>
+            <button className={`pb-${batch} bg-${a2Bg}`} onClick={(e) => handleAnswer(2)}>{a2}</button>
+            <button className={`pb-${batch} bg-${a3Bg}`} onClick={(e) => handleAnswer(3)}>{a3}</button>
+            { batch === 7 &&
+              <>
+                <button className={`pb-7 bg-${a4Bg}`} onClick={(e) => handleAnswer(4)}>{a4}</button>
+                <button className={`pb-7 bg-${a5Bg}`} onClick={(e) => handleAnswer(5)}>{a5}</button>
+                <button className={`pb-7 bg-${a6Bg}`} onClick={(e) => handleAnswer(6)}>{a6}</button>
+                <button className={`pb-7 bg-${a7Bg}`} onClick={(e) => handleAnswer(7)}>{a7}</button>
+              </>
+            }
+          </div>
+          {/* End Answer Section */}
+
+          {/* Scorekeeping Section */}
+          <div className="score">
+            <p className="score__count">QUESTION: {counter.current + 1}/{list.current.length}</p>
+            <p className="score__details">
+              SCORE:
+              <span className="score__correct">{scoreCorrect}</span>
+              <span className="score__incorrect">{scoreIncorrect}</span>
+              <span>{score}%</span>
+            </p>
+          </div>
+          {/* End Scorekeeping Section */}
+          <button className="btn ff-mono" onClick={() => window.location.reload(false)}>OPTIONS</button>
+        </div>
+      }
+      {/* End Quiz Wrapper */}
     </div>
   );
 };
