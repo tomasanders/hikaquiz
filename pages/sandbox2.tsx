@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import { prepareQuiz } from "../src/javascript/QuizLogic";
 
 const TestPage: NextPage = (props) => {
+  const list = useRef([])
+  const [masterList, setMasterList] = useState(list.current);
   const [batchSize, setBatchSize] = useState(3); // Sets the number of possible answer tiles.
   const [quizStarted, setQuizStarted] = useState(false); // Sets the quiz as started/not started.
   const [quizContent, setQuizContent] = useState('hiragana'); // Sets the quiz content.
@@ -13,7 +15,6 @@ const TestPage: NextPage = (props) => {
 
   const [question, setQuestion] = useState(""); // Sets the question text
   const [correctAnswer, setCorrectAnswer] = useState(""); // Sets the correct answer
-  const masterList: any = []; // Holds all the quiz data
 
   // Answer text for all answers
   const [a0, setA0] = useState("");
@@ -38,58 +39,113 @@ const TestPage: NextPage = (props) => {
    * Sets the first question and answers.
    */
   function firstQuestion() {
-    setQuestion(masterList[0][counter.current][0]);
-    setCorrectAnswer(masterList[0][counter.current][1]);
-    setA0(masterList[0][counter.current][2][0]);
-    setA1(masterList[0][counter.current][2][1]);
-    setA2(masterList[0][counter.current][2][2]);
-    setA3(masterList[0][counter.current][2][3]);
+    setQuestion(list.current[0][counter.current][0]);
+    setCorrectAnswer(list.current[0][counter.current][1]);
+    setA0(list.current[0][counter.current][2][0]);
+    setA1(list.current[0][counter.current][2][1]);
+    setA2(list.current[0][counter.current][2][2]);
+    setA3(list.current[0][counter.current][2][3]);
     if (batchSize === 7) {
-      setA4(masterList[0][counter.current][2][4]);
-      setA5(masterList[0][counter.current][2][5]);
-      setA6(masterList[0][counter.current][2][6]);
-      setA7(masterList[0][counter.current][2][7]);
+      setA4(list.current[0][counter.current][2][4]);
+      setA5(list.current[0][counter.current][2][5]);
+      setA6(list.current[0][counter.current][2][6]);
+      setA7(list.current[0][counter.current][2][7]);
     };
+  };
+
+  /**
+   * Sets up the initial state of the quiz.
+   * Pulls data from QuizLogic.ts, toggles the quiz display, and sets the first question.
+   */
+  function startQuiz() {
+    console.log(typeof list, "list")
+    list.current = prepareQuiz(quizContent, batchSize)
+    setMasterList(list.current);
+    console.log(list)
+    setQuizStarted(true);
+    firstQuestion();
+  };
+
+  /**
+   * Increments the counter, resets the UI, and sets the next question and answers.
+   */
+  function advanceQuiz() {
+    counter.current = counter.current + 1;
+    setCount(counter.current);
+    masterList.length >= 1 && firstQuestion();
+    console.log(masterList);
   };
 
   function handleAnswer(id: number, counter: number) {
     switch(id) {
       case 0:
-        a0 === correctAnswer ? setA0Status('correct') : setA0Status('incorrect');
+        if (a0 === correctAnswer) {
+          setA0Status('correct');
+          advanceQuiz();
+        } else {
+          setA0Status('incorrect');
+        };
         break;
       case 1:
-        a1 === correctAnswer ? setA1Status('correct') : setA1Status('incorrect');
+        if (a1 === correctAnswer) {
+          setA1Status('correct');
+          advanceQuiz();
+        } else {
+          setA1Status('incorrect');
+        };
         break;
       case 2:
-        a2 === correctAnswer ? setA2Status('correct') : setA2Status('incorrect');
+        if (a2 === correctAnswer) {
+          setA2Status('correct');
+          advanceQuiz();
+        } else {
+          setA2Status('incorrect');
+        };
         break;
       case 3:
-        a3 === correctAnswer ? setA3Status('correct') : setA3Status('incorrect');
+        if (a3 === correctAnswer) {
+          setA3Status('correct');
+          advanceQuiz();
+        } else {
+          setA3Status('incorrect');
+        };
         break;
       case 4:
-        a4 === correctAnswer ? setA4Status('correct') : setA4Status('incorrect');
+        if (a4 === correctAnswer) {
+          setA4Status('correct');
+          advanceQuiz();
+        } else {
+          setA4Status('incorrect');
+        };
         break;
       case 5:
-        a5 === correctAnswer ? setA5Status('correct') : setA5Status('incorrect');
+        if (a5 === correctAnswer) {
+          setA5Status('correct');
+          advanceQuiz();
+        } else {
+          setA5Status('incorrect');
+        };
         break;
       case 6:
-        a6 === correctAnswer ? setA6Status('correct') : setA6Status('incorrect');
+        if (a6 === correctAnswer) {
+          setA6Status('correct');
+          advanceQuiz();
+        } else {
+          setA6Status('incorrect');
+        };
         break;
       case 7:
-        a7 === correctAnswer ? setA7Status('correct') : setA7Status('incorrect');
+        if (a7 === correctAnswer) {
+          setA7Status('correct');
+          advanceQuiz();
+        } else {
+          setA7Status('incorrect');
+        };
         break;
     }
   };
 
-    /**
-   * Sets up the initial state of the quiz.
-   * Pulls data from QuizLogic.ts, toggles the quiz display, and sets the first question.
-   */
-    function startQuiz() {
-      masterList.push(prepareQuiz(quizContent, batchSize));
-      setQuizStarted(true);
-      firstQuestion();
-    };
+
 
 
   return (
