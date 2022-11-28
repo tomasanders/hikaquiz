@@ -9,6 +9,16 @@ import { katakanaObject } from "../src/data/katakanaObject";
 import { prepareQuiz } from "../src/javascript/Logic";
 
 const Home: NextPage = () => {
+  // Theme
+  const [theme, setTheme] = useState('light');
+  const [themeIcon, setThemeIcon] = useState('☽');
+
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    const newIcon = themeIcon === '☼' ? '☽' : '☼';
+    setThemeIcon(newIcon);
+  };
 
   // Quiz Contents
   const list = useRef("x"); // Quiz contents
@@ -16,19 +26,23 @@ const Home: NextPage = () => {
   const [batch, setBatch] = useState(3); // State - # possible answers (3/7)
   const [content, setContent] = useState('hiragana'); // State - quiz type (hiragana/katakana/both)
   const [secondChance, setSecondChance] = useState(true); // State - allows a second guess if first is incorrect
+
   // Counters
   // Tracks which question we're on
   const counter = useRef(0);
   const [count, setCount] = useState(counter.current);
+
   // Tracks correct/incorrect answers
   const correctCounter = useRef(0);
   const [scoreCorrect, setScoreCorrect] = useState(correctCounter.current);
   const incorrectCounter = useRef(0);
   const [scoreIncorrect, setScoreIncorrect] = useState(incorrectCounter.current);
   const [score, setScore] = useState(100); // Helps calculate score
+
   // Style-Related
   const [started, setStarted] = useState(false); // State - quiz started/not started
   const [font, setFont] = useState('ff-noto'); // State - font CSS class
+
   // State - answer tile background color via CSS class
   const [a0Bg, setA0Bg] = useState("default");
   const [a1Bg, setA1Bg] = useState("default");
@@ -38,12 +52,15 @@ const Home: NextPage = () => {
   const [a5Bg, setA5Bg] = useState("default");
   const [a6Bg, setA6Bg] = useState("default");
   const [a7Bg, setA7Bg] = useState("default");
+
   // State - opacity of praise messages via CSS class
   const [correctMsg, setCorrectMsg] = useState('opacity-0');
   const [incorrectMsg, setIncorrectMsg] = useState('opacity-0');
   const [tryAgainMsg, setTryAgainMsg] = useState('opacity-0');
+
   // Text
   const [question, setQuestion] = useState(""); // State - question text
+
   // State - answer text
   const [a0, setA0] = useState("");
   const [a1, setA1] = useState("");
@@ -262,15 +279,16 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="app">
+    <div className="app" data-theme={theme}>
       <Head>
         <title>ひカ</title>
         <meta name="description" content="A Simple Hiragana and Katakana Quiz" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <h1 className="app__title">HiKa QUIZ</h1>
-
+      <div className="title-wrap">
+        <h1 className="title">HiKa QUIZ</h1>
+        <button className="icon" onClick={switchTheme}>{themeIcon}</button>
+      </div>
       {/* Options Menu */}
       { started === false &&
         <div className="options">
@@ -333,7 +351,6 @@ const Home: NextPage = () => {
 
           {/* Scorekeeping Section */}
           <div className="score">
-            <p className="score__count">QUESTION: {counter.current + 1}/{list.current.length}</p>
             <p className="score__details">
               SCORE:
               <span className="score__correct">{scoreCorrect}</span>
@@ -342,7 +359,7 @@ const Home: NextPage = () => {
             </p>
           </div>
           {/* End Scorekeeping Section */}
-          <button className="btn ff-mono" onClick={() => window.location.reload(false)}>OPTIONS</button>
+          <button className="btn ff-mono" onClick={() => window.location.reload(false)}>OPTIONS (Ends Quiz!)</button>
         </div>
       }
       {/* End Quiz Wrapper */}

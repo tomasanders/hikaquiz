@@ -3,17 +3,42 @@
 // font-family: 'Roboto Mono', monospace;
 // font-family: 'RocknRoll One', sans-serif;
 
-// Custom Properties
-$correct: #34C1AA;    // rgb(176, 205, 176)
-$incorrect: #E4724E;  // rgb(233, 147, 112)
-$background: #FEECCA; // rgb(240, 230, 231)
-$foreground: #F7B85C; // rgb(234, 195, 13)
-$white: #FFF;         // rgb(255, 255, 255)
-$black: #000;         // rgb(0, 0, 0)
+:root {
+  --background: #FEECCA;
+  --foreground: #F7B85C;
 
-$box-shadow: 4px 4px $black;
-$box-shadow-sm: 2px 2px $black;
-$border: 2px solid $black;
+  --correct: #34C1AA;
+  --incorrect: #E4724E;
+
+  --lightxl: #FFF;
+  --darkxl: #000;
+
+  --text: #000;
+}
+
+[data-theme='dark'] {
+  --background: #000000;
+  --foreground: #0072B2;
+
+  --correct: #009E73;
+  --incorrect: #D55E00;
+
+  --lightxl: #000000;
+  --darkxl: #FFF;
+
+  --text: #FFF;
+}
+
+$background: var(--background);
+$foreground: var(--foreground);
+$correct: var(--correct);
+$incorrect: var(--incorrect);
+$lightxl: var(--lightxl);
+$darkxl: var(--darkxl);
+$box-shadow: 4px 4px $darkxl;
+$box-shadow-sm: 2px 2px $darkxl;
+$border: 2px solid $darkxl;
+$text: var(--text);
 
 // End Custom Properties
 
@@ -38,6 +63,10 @@ body,
   p {
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
+  }
+
+  button {
+    color: $text;
   }
 }
 // Typographic tweaks!
@@ -65,8 +94,10 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+span {
   overflow-wrap: break-word;
+  color: $text;
 }
 // 9. Create a root stacking context
 #root,
@@ -85,7 +116,7 @@ h6 {
 }
 
 .bg-white {
-  background: $white;
+  background: $lightxl;
 }
 
 .bg-correct {
@@ -114,15 +145,6 @@ h6 {
   background: $background;
   padding: 1rem;
   text-align: center;
-
-  // HiKa QUIZ
-  &__title {
-    font-size: 4rem;
-    font-weight: 900;
-    margin-bottom: 1rem;
-    text-shadow: 4px 4px rgba(0, 0, 0, 0.5);
-    color: $black;
-  }
 }
 
 // Wraps the options menu
@@ -136,7 +158,7 @@ h6 {
   }
 
   &__header {
-    border-bottom: 2px solid $black;
+    border-bottom: 2px solid $darkxl;
     font-size: 1.25rem;
     margin-bottom: 1rem;
   }
@@ -161,7 +183,7 @@ h6 {
   width: 100%;
   border: $border;
   box-shadow: $box-shadow;
-  background: $white;
+  background: $lightxl;
   margin-top: 1rem;
   padding-block: .5rem;
   font-size: 1.5rem;
@@ -236,7 +258,7 @@ h6 {
 .score {
   display: grid;
   gap: .5rem;
-  background: $white;
+  background: $lightxl;
   border: $border;
   box-shadow: $box-shadow;
   padding: .5rem;
@@ -259,5 +281,29 @@ h6 {
 
   &__incorrect {
     color: $incorrect;
+  }
+}
+
+.title-wrap {
+  display: flex;
+  text-align: left;
+  position: relative;
+  // HiKa QUIZ
+  .title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 4px 4px rgba(0, 0, 0, 0.5);
+    color: $text;
+  }
+
+  .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    font-size: 3rem;
+    font-weight: 700;
   }
 }

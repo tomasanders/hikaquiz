@@ -1,18 +1,16 @@
 import { hiragana } from "../data/hiragana";
 import { katakana } from "../data/katakana";
-import { hiraganaObject } from "../data/hiraganaObject";
-import { katakanaObject } from "../data/katakanaObject";
 
 /**
  * Shuffles an array.
- */
+*/
 const shuffleArray = (array: any) => {
   return array.sort((a: unknown, b: unknown) => 0.5 - Math.random());
 };
 
 /**
  * Returns a random array from hiragana/katakana list. [en, ja, tag]
- */
+*/
 const getRandom = (array: string[][]) => {
   const randomNumber: number = Math.floor(Math.random() * (array.length));
   return array[randomNumber][0];
@@ -22,7 +20,7 @@ const getRandom = (array: string[][]) => {
  * Creates an array of quiz questions and possible answers.
  * Takes an array (selected from options menu) and batch (selected from options menu).
  * Return format is: [[ja, en, tag, ['a0' ... 'ax']], [repeat]]
- */
+*/
 const createQuizContents = (array: string[][], batch: number) => {
   let quizContents: string[][] = [];
   array.forEach(element => {
@@ -35,7 +33,6 @@ const createQuizContents = (array: string[][], batch: number) => {
         counter ++;
       };
     } while (counter < batch); // ensures {batch} + 1 answer choices
-    // const quizQuestion: string | string[][] = [element[1], element[0], element[2], shuffleArray(answerList)];
     quizContents.push([element[1], element[0], element[2], shuffleArray(answerList)]);
   });
   return quizContents;
@@ -43,7 +40,7 @@ const createQuizContents = (array: string[][], batch: number) => {
 
 /**
  * Gets the data for the quiz and formats it via createQuizContents()
- */
+*/
 const prepareQuiz = (content: string, batch: number) => {
   let quizList: any = [];
   let shuffledData: any;
