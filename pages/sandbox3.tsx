@@ -2,6 +2,9 @@ import type { NextPage } from "next";
 import { useRef, useState } from "react";
 // Data Imports
 import { hiragana } from "../src/data/hiragana";
+import { katakana } from "../src/data/katakana";
+import { hiraganaObject } from "../src/data/hiraganaObject";
+import { katakanaObject } from "../src/data/katakanaObject";
 // Logic Import
 import { prepareQuiz } from "../src/javascript/Logic";
 
@@ -95,7 +98,7 @@ const TestPage: NextPage = (props) => {
     setA7(list.current[counter.current][3][7]);
   };
 
-  // Increases the correct/incorrect counters and sets the correct/incorrect message
+  // Increases the correct/incorrect counters and sets the correct/incorrect message, and increments.
   function updateScore(type: "correct" | "incorrect") {
     if (type === "correct") {
       setCorrectMsg('opacity-1');
@@ -118,7 +121,7 @@ const TestPage: NextPage = (props) => {
     }, 500);
   };
 
-  // Checks the answers, sets style based on correct/incorrect, increments.
+  // Checks the answers and sets styles accordingly.
   function handleAnswer(id: number) {
     switch(id) {
       case 0:
@@ -127,7 +130,7 @@ const TestPage: NextPage = (props) => {
           updateScore("correct");
         } else {
           setA0Bg('incorrect');
-          // setA0(that tile's h/k)
+          setA0(replaceAnswer(a0));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -138,7 +141,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA1Bg('incorrect');
-          // setA1(that tile's h/k)
+          setA1(replaceAnswer(a1));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -149,7 +152,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA2Bg('incorrect');
-          // setA2(that tile's h/k)
+          setA2(replaceAnswer(a2));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -160,7 +163,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA3Bg('incorrect');
-          // setA3(that tile's h/k)
+          setA3(replaceAnswer(a3));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -171,7 +174,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA4Bg('incorrect');
-          // setA4(that tile's h/k)
+          setA4(replaceAnswer(a4));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -182,7 +185,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA5Bg('incorrect');
-          // setA5(that tile's h/k)
+          setA5(replaceAnswer(a5));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -193,7 +196,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA6Bg('incorrect');
-          // setA6(that tile's h/k)
+          setA6(replaceAnswer(a6));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -204,7 +207,7 @@ const TestPage: NextPage = (props) => {
           increment();
         } else {
           setA7Bg('incorrect');
-          // setA7(that tile's h/k)
+          setA7(replaceAnswer(a7));
           secondChance === true ? tryAgain() : updateScore("incorrect");
         };
         break
@@ -217,6 +220,17 @@ const TestPage: NextPage = (props) => {
     setStarted(true);
     setText();
   };
+
+  // Finds the hiragana/katakana associated with the incorrect answer in the Object.
+  function replaceAnswer(answer) {
+    let checked;
+    if (list.current[counter.current][2] === "h") {
+      checked = (Object.values(hiraganaObject[answer]))[1];
+    } else {
+      checked = (Object.values(katakanaObject[answer]))[1];
+    };
+    return checked;
+  }
 
   return (
     <div className="app">

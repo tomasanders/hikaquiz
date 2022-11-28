@@ -1,5 +1,7 @@
 import { hiragana } from "../data/hiragana";
 import { katakana } from "../data/katakana";
+import { hiraganaObject } from "../data/hiraganaObject";
+import { katakanaObject } from "../data/katakanaObject";
 
 /**
  * Shuffles an array.
