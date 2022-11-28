@@ -178,6 +178,3 @@ const TestPage: NextPage = (props) => {
 };
 
 export default TestPage;
-
-
-// TODO: implement increment() function.

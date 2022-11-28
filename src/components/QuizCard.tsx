@@ -1,6 +1,5 @@
 import { quizList } from "../javascript/QuizLogic";
 import { useState, useRef } from "react";
-import { QuestionFrame } from "./QuestionFrame";
 
 export const QuizCard = () => {
   // State assignments
