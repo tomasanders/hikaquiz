@@ -17,16 +17,16 @@
 }
 
 [data-theme='dark'] {
-  --background: #000000;
-  --foreground: #0072B2;
+  --background: #2E2E2E;
+  --foreground: #F79507;
 
-  --correct: #009E73;
-  --incorrect: #D55E00;
+  --correct: #4B8D22;
+  --incorrect: #F42C4A;
 
-  --lightxl: #000000;
-  --darkxl: #FFF;
+  --lightxl: #1a1a1a;
+  --darkxl: #f9f9f9;
 
-  --text: #FFF;
+  --text: #f9f9f9;
 }
 
 $background: var(--background);
@@ -97,7 +97,6 @@ h5,
 h6,
 span {
   overflow-wrap: break-word;
-  color: $text;
 }
 // 9. Create a root stacking context
 #root,
@@ -296,14 +295,47 @@ span {
     text-shadow: 4px 4px rgba(0, 0, 0, 0.5);
     color: $text;
   }
+}
+
+#logo {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  text-shadow:
+    -1px -1px 0 $text, // top & left outline
+    1px 1px 0 $text, // bottom & right outline
+    2px 2px 2px rgba(128, 128, 128, 0.5),
+    4px 4px 0 $text; // shadow
+
+  p {
+    font-family: 'RocknRoll One', sans-serif;
+  }
+
+  .logo__hi {
+    color: $correct;
+  }
+
+  .logo__ka {
+    color: $incorrect;
+  }
+
+  .logo__quiz {
+    color: $foreground;
+    margin-left: 1rem;
+  }
+}
+
+.theme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 
   .icon {
-    position: absolute;
-    top: 0;
-    right: 0;
     background: transparent;
     border: none;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
   }
 }

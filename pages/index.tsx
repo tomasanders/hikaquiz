@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRef, useState } from "react";
+import { Logo } from '../components/Logo';
 
 // Data Imports
 import { hiraganaObject } from "../src/data/hiraganaObject";
@@ -286,8 +287,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="title-wrap">
-        <h1 className="title">HiKa QUIZ</h1>
-        <button className="icon" onClick={switchTheme}>{themeIcon}</button>
+        <Logo />
       </div>
       {/* Options Menu */}
       { started === false &&
@@ -363,6 +363,9 @@ const Home: NextPage = () => {
         </div>
       }
       {/* End Quiz Wrapper */}
+      <div className="theme">
+        <button className="icon" onClick={switchTheme}>{themeIcon}</button>
+      </div>
     </div>
   );
 };
