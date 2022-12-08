@@ -6,7 +6,7 @@ A simple flashcard-style hiragana/katakana quiz.
 
 ## Tech Stack
 
-Built using NextJS, React, and TypeScript.
+Built using NextJS, React, TypeScript, and SASS.
 
 
 
